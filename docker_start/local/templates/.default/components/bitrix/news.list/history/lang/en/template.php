@@ -1,0 +1,2 @@
+<?
+$MESS["HISTORY"] = "History";

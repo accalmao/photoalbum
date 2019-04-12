@@ -25,7 +25,7 @@ RUN usermod -u $USER_ID nginx
 #
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
-RUN sed -i "s#PROJECT_PREFIX#${PROJECT_PREFIX}#" /etc/nginx/conf.d/default.conf
+RUN sed -i "s/#PROJECT_PREFIX#/${PROJECT_PREFIX}/g" /etc/nginx/conf.d/default.conf
 COPY ./conf/upstream.conf /etc/nginx/conf.d/upstream.conf
 
 
