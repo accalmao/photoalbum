@@ -18,7 +18,7 @@ fi
 
 if [ "$GROUP_ID" == "0" ];
 then
-    export USER_ID=$DEFAULT_USER;
+    export GROUP_ID=$DEFAULT_GROUP;
 fi
 
 
