@@ -14,6 +14,6 @@ ADD my.cnf /etc/mysql/conf.d/my.cnf
 RUN groupmod -g $USER_ID mysql
 RUN usermod -u $USER_ID mysql
 
-CMD ["mysqld"]
+CMD ["mysqld", "--character-set-server=utf8", "--collation-server=utf8_unicode_ci"]
 
 EXPOSE 3306
