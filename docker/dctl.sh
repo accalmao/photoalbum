@@ -31,6 +31,7 @@ if [ $# -eq 0 ]
     echo "HELP:"
     echo "make env - copy .env.example to .env"
     echo "make db - load init bitrix database dump to mysql"
+    echo "db - run db cli"
     echo "db import FILE - load FILE to mysql"
     echo "db renew - load dump from repo, fresh db and apply"
     echo "build - make docker build"
@@ -76,6 +77,16 @@ fi
 
 if [ "$1" == "db" ];
   then
+    if [ "$2" == "" ];
+        then
+    docker exec -it ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+    fi
+
+    if [ "$2" == "export" ];
+        then
+        docker exec -it ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+    fi
+
     if [ "$2" == "import" ];
         then
         applyDump $3
