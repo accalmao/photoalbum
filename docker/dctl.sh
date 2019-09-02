@@ -122,6 +122,7 @@ fi
 
 if [ "$1" == "up" ];
   then
+  docker-compose build 
     if [ "$2" == "silent" ];
         then
             docker-compose up -d;
