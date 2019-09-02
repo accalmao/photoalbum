@@ -31,20 +31,26 @@ if [ $# -eq 0 ]
     echo "HELP:"
     echo "make env - copy .env.example to .env"
     echo "make db - load init bitrix database dump to mysql"
-    echo "db - run db cli"
     echo "db import FILE - load FILE to mysql"
     echo "db renew - load dump from repo, fresh db and apply"
+    echo "db - run db cli"
+    echo "db export > file.sql - export db to file"
     echo "build - make docker build"
     echo "up - docker up in console"
     echo "up silent - docker up daemon"
     echo "down - docker down"
     echo "run - run in php container from project root"
     echo "test - run tests"
+    echo "cli some_command - run scripts/cli.php some_command (migration, etc)"
     echo "cept some_command (cept generate:cept acceptance Test) - run codeception with params"
 fi
 
 function applyDump {
     cat $1 | docker exec -i ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+    return $?
+}
+function makeDump {
+    docker exec -i ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE > $1;
     return $?
 }
 
@@ -73,19 +79,25 @@ if [ "$1" == "make" ];
         then
          applyDump "../bitrix/database/init.sql";
     fi
+    if [ "$2" == "dump" ];
+        then
+          git clone $DATABASE_REPO ../docker/data/mysql/dump
+          makeDump ../docker/data/mysql/dump/database.sql;
+    fi
 fi
 
 if [ "$1" == "db" ];
   then
     if [ "$2" == "" ];
         then
-    docker exec -it ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+        docker exec -it ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
     fi
 
     if [ "$2" == "export" ];
         then
         docker exec -it ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
     fi
+
 
     if [ "$2" == "import" ];
         then
@@ -99,6 +111,7 @@ if [ "$1" == "db" ];
         applyDump "../docker/containers/mysql/drop_all_tables.sql"
         applyDump "../docker/data/mysql/dump/database.sql"
     fi
+
 
 fi
 
@@ -126,6 +139,12 @@ if [ "$1" == "test" ];
   then
         runInPhp php vendor/bin/codecept run --env docker --debug
 fi
+
+if [ "$1" == "cli" ];
+  then
+        runInPhp php scripts/cli.php "${@:2}"
+fi
+
 
 if [ "$1" == "cept" ];
   then
