@@ -117,23 +117,23 @@ fi
 
 if [ "$1" == "build" ];
   then
-    docker-compose build 
+    docker-compose -p ${PROJECT_PREFIX} build 
 fi
 
 if [ "$1" == "up" ];
   then
-  docker-compose build 
+  docker-compose -p ${PROJECT_PREFIX} build 
     if [ "$2" == "silent" ];
         then
-            docker-compose up -d;
+            docker-compose -p ${PROJECT_PREFIX} up -d;
         else
-            docker-compose up
+            docker-compose -p ${PROJECT_PREFIX} up
     fi
 fi
 
 if [ "$1" == "down" ];
   then
-    docker-compose down
+    docker-compose -p ${PROJECT_PREFIX} down
 fi
 
 if [ "$1" == "test" ];
