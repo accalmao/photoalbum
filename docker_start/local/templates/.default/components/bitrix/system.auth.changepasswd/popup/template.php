@@ -1,4 +1,4 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
@@ -15,12 +15,12 @@ Loc::loadMessages(__FILE__);
     </div>
     <div class="modal-body">
         <form action="<?=$arResult["AUTH_FORM"]?>" method="post" name="system_auth_form<?=$arResult['RND']?>" class="modal-form js-validate js-password-reset-form">
-            <?if($arResult['BACKURL'] <> ''):?>
+            <?php if($arResult['BACKURL'] <> ''):?>
                 <input type="hidden" name="backurl" value="<?=$arResult['BACKURL']?>"/>
-            <?endif?>
-            <?foreach ($arResult['POST'] as $key => $value):?>
+            <?php endif?>
+            <?php foreach ($arResult['POST'] as $key => $value):?>
                 <input type="hidden" name="<?=$key?>" value="<?=$value?>"/>
-            <?endforeach?>
+            <?php endforeach?>
             <input type="hidden" name="AUTH_FORM" value="Y">
             <input type="hidden" name="TYPE" value="CHANGE_PWD">
             <input type="hidden" name="RETURN_JSON" value="Y"/>

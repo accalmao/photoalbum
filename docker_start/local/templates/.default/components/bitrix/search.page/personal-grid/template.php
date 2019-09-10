@@ -1,4 +1,4 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+<?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
@@ -16,12 +16,12 @@ Loc::loadMessages(__FILE__);
 /** @var CBitrixComponent $component */
 ?>
 
-<?if(empty($arResult['SEARCH'])):?>
+<?php if(empty($arResult['SEARCH'])):?>
     <div class="folder-grid" style="padding-top: 15px;">
         <div style="width: 100%; text-align: center;"><?=Loc::getMessage('PERSONAL_SEARCH_EMPTY')?></div>
     </div>
-<?else:?>
-    <?
+<?php else:?>
+    <?php
     $filterData = [
         'SECTIONS' => [],
         'ELEMENTS' => []
@@ -47,4 +47,4 @@ Loc::loadMessages(__FILE__);
             'CACHE_TYPE' => 'N'
         )
     );?>
-<?endif;?>
+<?php endif;?>

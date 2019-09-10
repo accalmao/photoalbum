@@ -1,7 +1,7 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 
-<?if (!empty($arResult)):?>
+<?php if (!empty($arResult)):?>
     <div class="menu">
         <div class="menu-close js-menuClose">
             <div class="menu-close__icon">
@@ -13,15 +13,15 @@
         </div>
         <div class="menu-container">
             <div class="menu-nav">
-              <?$previousLevel = 0;
+              <?php $previousLevel = 0;
                 foreach($arResult as $arItem):?>
-                    <?if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel):?>
+                    <?php if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel):?>
                         <?=str_repeat("</div></div></div>", ($previousLevel - $arItem["DEPTH_LEVEL"]));?>
-                    <?endif?>
+                    <?php endif?>
 
-                    <?if ($arItem["IS_PARENT"]):?>
+                    <?php if ($arItem["IS_PARENT"]):?>
 
-                        <?if ($arItem["DEPTH_LEVEL"] == 1):?>
+                        <?php if ($arItem["DEPTH_LEVEL"] == 1):?>
                             <div class="menu-nav__elem">
                                 <a href="javascript:;" class="menu-nav__link js-menuNavToggle">
                                     <?=$arItem["TEXT"]?>
@@ -29,58 +29,58 @@
                                 <div class="menu-nav__sublist">
                                     <div class="menu-subnav">
                         
-                            <?else:?>
+                            <?php else:?>
                             <div  class="menu-subnav__elem">
                                 <a href="<?=$arItem["LINK"]?>" class="menu-subnav__link js-menuNavToggle">
                                     <?=$arItem["TEXT"]?>
                                 </a>
                                 <div class="menu-nav__sublist">
                                     <div class="menu-subnav">
-                        <?endif?>
-                    <?else:?>
-                        <?if ($arItem["PERMISSION"] > "D"):?>
-                            <?if ($arItem["DEPTH_LEVEL"] == 1):?>
+                        <?php endif?>
+                    <?php else:?>
+                        <?php if ($arItem["PERMISSION"] > "D"):?>
+                            <?php if ($arItem["DEPTH_LEVEL"] == 1):?>
                                 <div class="menu-nav__elem <?=$arItem['PARAMS']['visible-xs'] ? $arItem['PARAMS']['visible-xs'] : '';?>">
                                     <a href="<?=$arItem["LINK"]?>"
-                                        <?if ($arItem["PARAMS"]["popup"]):?>  data-mfp-src="<?=$arItem["PARAMS"]["popup"];?>" <?endif?>
-                                       class="menu-nav__link <?if ($arItem["PARAMS"]["special"]): echo $arItem["PARAMS"]["special"]; endif?>">
+                                        <?php if ($arItem["PARAMS"]["popup"]):?>  data-mfp-src="<?=$arItem["PARAMS"]["popup"];?>" <?php endif?>
+                                       class="menu-nav__link <?php if ($arItem["PARAMS"]["special"]): echo $arItem["PARAMS"]["special"]; endif?>">
                                         <?=$arItem["TEXT"]?>
                                     </a>
                                 </div>
 
-                            <?else:?>
+                            <?php else:?>
                                 <div class="menu-subnav__elem">
-                                    <a href="<?=$arItem["LINK"]?>" class="menu-subnav__link <?if ($arItem["PARAMS"]["special"]): echo $arItem["PARAMS"]["special"]; endif?>">
+                                    <a href="<?=$arItem["LINK"]?>" class="menu-subnav__link <?php if ($arItem["PARAMS"]["special"]): echo $arItem["PARAMS"]["special"]; endif?>">
                                         <?=$arItem["TEXT"]?>
                                     </a>
                                 </div>
-                            <?endif?>
-                        <?else:?>
-                            <?if ($arItem["DEPTH_LEVEL"] == 1):?>
+                            <?php endif?>
+                        <?php else:?>
+                            <?php if ($arItem["DEPTH_LEVEL"] == 1):?>
                                 <div class="menu-nav__elem <?=$arItem['PARAMS']['visible-xs'] ? $arItem['PARAMS']['visible-xs'] : '';?>">
                                     <a href="" class="menu-nav__link" title="<?=GetMessage("MENU_ITEM_ACCESS_DENIED")?>">
                                         <?=$arItem["TEXT"]?>
                                     </a>
                                 </div>
-                            <?else:?>
+                            <?php else:?>
                                 <div class="menu-subnav__elem">
                                     <a href="" class="menu-subnav__link denied" title="<?=GetMessage("MENU_ITEM_ACCESS_DENIED")?>">
                                         <?=$arItem["TEXT"]?>
                                     </a>
                                 </div>
-                            <?endif?>
-                        <?endif?>
-                    <?endif?>
-                    <?$previousLevel = $arItem["DEPTH_LEVEL"];?>
-                <?endforeach?>
+                            <?php endif?>
+                        <?php endif?>
+                    <?php endif?>
+                    <?php $previousLevel = $arItem["DEPTH_LEVEL"];?>
+                <?php endforeach?>
 
-                <?if ($previousLevel > 1)://close last item tags?>
+                <?php if ($previousLevel > 1)://close last item tags?>
                     <?=str_repeat("</div></div></div>", ($previousLevel-1) );?>
-                <?endif?>
+                <?php endif?>
             </div>
         </div>
         <div class="menu-bottom">
-            <? if (SITE_ID == 's1') {
+            <?php  if (SITE_ID == 's1') {
                 $link = '/ru' .$APPLICATION->GetCurPage();
             } elseif (SITE_ID == 'ru') {
                 $link = str_replace('/ru', '', $APPLICATION->GetCurPage());
@@ -91,7 +91,7 @@
                 <div class="header-lang__circle"></div>
             </div>
             <div class="menu-social">
-                <?$APPLICATION->IncludeComponent(
+                <?php $APPLICATION->IncludeComponent(
                     "bitrix:main.include",
                     "social",
                     Array(
@@ -110,4 +110,4 @@
             </a>
         </div>
     </div>
-<?endif?>
+<?php endif?>

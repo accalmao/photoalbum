@@ -1,4 +1,4 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+<?php if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
@@ -22,7 +22,7 @@ global $USER;
 $isAuthorized = $USER->IsAuthorized();
 ?>
 
-<?
+<?php
 if(!empty($arResult['SEARCH'])):?>
     <?php
     $staticResults = [];
@@ -50,22 +50,22 @@ if(!empty($arResult['SEARCH'])):?>
         }
     }
     ?>
-<?endif;?>
+<?php endif;?>
 
 <div class="search-result js-searchScroll">
     <div class="search-result__container">
-        <?if(empty($arResult['SEARCH']) || (!$isAuthorized && empty($filterData['BRANDS']['ELEMENTS']))):?>
+        <?php if(empty($arResult['SEARCH']) || (!$isAuthorized && empty($filterData['BRANDS']['ELEMENTS']))):?>
             <div class="folder-grid" style="padding-top: 15px;">
                 <div style="width: 100%; text-align: center;"><?=Loc::getMessage('PERSONAL_SEARCH_EMPTY')?></div>
             </div>
-        <?else:?>
-            <?if(!empty($filterData['BRANDS']['ELEMENTS'])):?>
+        <?php else:?>
+            <?php if(!empty($filterData['BRANDS']['ELEMENTS'])):?>
                 <div class="search-result__group">
                     <div class="search-result__header">
                         <div class="section-title"><?=Loc::getMessage('PERSONAL_SEARCH_PRODUCTS')?></div>
                     </div>
                     <div class="search-result__body">
-                        <?$APPLICATION->IncludeComponent(
+                        <?php $APPLICATION->IncludeComponent(
                             'project:search.result.list',
                             '.default',
                             array(
@@ -76,14 +76,14 @@ if(!empty($arResult['SEARCH'])):?>
                         );?>
                     </div>
                 </div>
-            <?endif;?>
-            <?if($isAuthorized && !empty($filterData['PERSONAL']['ELEMENTS'])):?>
+            <?php endif;?>
+            <?php if($isAuthorized && !empty($filterData['PERSONAL']['ELEMENTS'])):?>
                 <div class="search-result__group">
                     <div class="search-result__header">
                         <div class="section-title"><?=Loc::getMessage('PERSONAL_SEARCH_FILES')?></div>
                     </div>
                     <div class="search-result__body">
-                        <?$APPLICATION->IncludeComponent(
+                        <?php $APPLICATION->IncludeComponent(
                             'project:personal.sections.list',
                             '.default',
                             array(
@@ -98,24 +98,24 @@ if(!empty($arResult['SEARCH'])):?>
                         );?>
                     </div>
                 </div>
-            <?endif;?>
-            <?if(!empty($staticResults)):?>
+            <?php endif;?>
+            <?php if(!empty($staticResults)):?>
                 <div class="search-result__group">
                     <div class="search-result__header">
                         <div class="section-title"><?=Loc::getMessage('PERSONAL_SEARCH_TEXT')?></div>
                     </div>
                     <div class="search-result__body">
                         <div class="result-text">
-                            <?foreach($staticResults as $item):?>
+                            <?php foreach($staticResults as $item):?>
                                 <div class="result-text__elem">
                                     <div class="result-text__title"><a href="<?=$item['URL']?>"><?=$item['TITLE']?></a></div>
                                     <div class="result-text__desc"><?=$item['BODY']?></div>
                                 </div>
-                            <?endforeach;?>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
-            <?endif;?>
-        <?endif;?>
+            <?php endif;?>
+        <?php endif;?>
     </div>
 </div>

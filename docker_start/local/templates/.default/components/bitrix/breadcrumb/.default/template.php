@@ -14,16 +14,16 @@ ob_start();
 
 <div class="page-account__breadcrumb">
     <div class="breadcrumb">
-        <?foreach ($arResult as $key => $item):
+        <?php foreach ($arResult as $key => $item):
             $notLast = $key < (count($arResult) - 1);?>
             <div class="breadcrumb-elem">
-                <div class="breadcrumb-title"><a<?if($notLast):?> href="<?=$item['LINK']?>"<?endif;?>><?=$item['TITLE']?></a><?if($notLast):?>&nbsp-&nbsp<?endif;?></div>
+                <div class="breadcrumb-title"><a<?php if($notLast):?> href="<?=$item['LINK']?>"<?php endif;?>><?=$item['TITLE']?></a><?php if($notLast):?>&nbsp-&nbsp<?php endif;?></div>
             </div>
-        <?endforeach;?>
+        <?php endforeach;?>
     </div>
 </div>
 
-<?
+<?php
 $str = ob_get_contents();
 ob_end_clean();
 return $str;
