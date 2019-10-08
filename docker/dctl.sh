@@ -47,6 +47,7 @@ fi
 
 function applyDump {
     cat $1 | docker exec -i ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+    echo dump applied successfully
     return $?
 }
 function makeDump {
@@ -68,6 +69,10 @@ function runInPhp {
     return $?
 }
 
+function enterInPhp {
+    docker exec -it ${PROJECT_PREFIX}_php su www-data
+    return $?
+}
 
 if [ "$1" == "make" ];
   then
@@ -77,7 +82,7 @@ if [ "$1" == "make" ];
     fi
     if [ "$2" == "db" ];
         then
-         applyDump "../bitrix/database/init.sql";
+         applyDump "../bitrix/database/init.sql" 2>/dev/null;
     fi
     if [ "$2" == "dump" ];
         then
@@ -143,7 +148,7 @@ fi
 
 if [ "$1" == "cli" ];
   then
-        runInPhp php scripts/cli.php "${@:2}"
+        runInPhp php ${PROJECT_PREFIX}/local/modules/ds.migrate/tools/migrate.php "${@:2}"
 fi
 
 
@@ -158,4 +163,7 @@ if [ "$1" == "run" ];
     runInPhp "${@:2}"
 fi
 
-
+if [ "$1" == "in" ];
+  then
+    enterInPhp "${@:2}"
+fi

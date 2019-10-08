@@ -1,8 +1,12 @@
 {
+    "extra": {
+        "installer-paths": {
+            "docker_start/local/modules/{$name}/": ["type:bitrix-module"]
+        }
+    },
     "require": {
-        "marvin255/bxmigrate": "~3.0.0",
-        "symfony/console": "3.2.*",
-        "wheatleywl/bx-iblock-helpers": "^1.0.0"
+        "wheatleywl/bx-iblock-helpers": "^1.0.0",
+        "evk/ds.migrate": "dev-master"
     },
     "require-dev": {
         "codeception/codeception": "^2.5"
