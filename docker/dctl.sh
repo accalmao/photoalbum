@@ -47,9 +47,9 @@ fi
 
 function applyDump {
     cat $1 | docker exec -i ${PROJECT_PREFIX}_mysql mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
-    echo dump applied successfully
     return $?
 }
+
 function makeDump {
     docker exec -i ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE > $1;
     return $?
@@ -82,7 +82,7 @@ if [ "$1" == "make" ];
     fi
     if [ "$2" == "db" ];
         then
-         applyDump "../bitrix/database/init.sql" 2>/dev/null;
+         applyDump "../bitrix/database/init.sql";
     fi
     if [ "$2" == "dump" ];
         then
