@@ -146,17 +146,15 @@ if [ "$1" == "test" ];
         runInPhp php vendor/bin/codecept run --env docker --debug
 fi
 
-if [ "$1" == "cli" ];
+if [ "$1" == "cli" -o "$1" == "mg" ];
   then
         runInPhp php ${PROJECT_PREFIX}/local/modules/ds.migrate/tools/migrate.php "${@:2}"
 fi
-
 
 if [ "$1" == "cept" ];
   then
     runInPhp php vendor/bin/codecept "${@:2}"
 fi
-
 
 if [ "$1" == "run" ];
   then

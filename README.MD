@@ -40,15 +40,11 @@ http://localhost/bitrix
 Миграции
 ==================
 ```
-docker/dctl.sh cli #выводит список всех команд миграций
-docker/dctl.sh cli bxmigrate:create name #создаёт миграцию с именем name
-docker/dctl.sh cli bxmigrate:up #применяет миграции
-docker/dctl.sh cli bxmigrate:down #делает down последней миграции
-
+docker/dctl.sh mg              #выводит список всех команд миграций
+docker/dctl.sh mg add          #создаёт миграцию
+docker/dctl.sh mg up           #применяет миграции
+docker/dctl.sh mg down         #делает down всех миграций
 ```
-
-Больше информации о миграциях: https://github.com/marvin255/bxmigrate
-Примеры миграций: https://wiki.yandex.ru/marvinmigrations/ (должен быть выполнен вход с корп. почты)
 
 
 Запуск cs_fixer для фикса кода
