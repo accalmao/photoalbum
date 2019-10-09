@@ -40,10 +40,20 @@ http://localhost/bitrix
 Миграции
 ==================
 ```
-docker/dctl.sh mg              #выводит список всех команд миграций
-docker/dctl.sh mg add          #создаёт миграцию
-docker/dctl.sh mg up           #применяет миграции
-docker/dctl.sh mg down         #делает down всех миграций
+docker/dctl.sh mg                   #выводит список всех команд миграций
+docker/dctl.sh mg add               #создаёт миграцию
+docker/dctl.sh mg create            #создаёт миграцию (alias для add)
+docker/dctl.sh mg up                #применяет миграции
+docker/dctl.sh mg up 3              #применяет 3 новых миграции
+docker/dctl.sh mg down              #делает down последней применённой миграции
+docker/dctl.sh mg down 3            #делает down последним 3-ём применённым миграциям
+docker/dctl.sh mg ls                #выводит список всех миграций
+docker/dctl.sh mg ls --new          #выводит список всех новых миграций
+docker/dctl.sh mg ls --installed    #выводит список всех применённых миграций
+docker/dctl.sh mg redo name         #переприменяет миграцию
+docker/dctl.sh mg refresh name      #переприменяет миграцию
+docker/dctl.sh mg downup name       #переприменяет миграцию
+docker/dctl.sh mg down-up name      #переприменяет миграцию
 ```
 
 
