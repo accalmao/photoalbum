@@ -50,14 +50,8 @@ function applyDump {
     return $?
 }
 
-function makeDump {
-    docker exec -i ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE > $1;
-    return $?
-}
-
 function runInMySql {
     local command=$@
-    echo $command;
     docker exec -i ${PROJECT_PREFIX}_mysql su mysql -c "$command"
     return $?
 }
@@ -74,6 +68,13 @@ function enterInPhp {
     return $?
 }
 
+function makeDump {
+    runInMySql "export MYSQL_PWD='$MYSQL_PASSWORD'; mysqldump -u $MYSQL_USER $MYSQL_DATABASE" > $1
+    return $?
+}
+
+
+
 if [ "$1" == "make" ];
   then
     if [ "$2" == "env" ];
@@ -84,10 +85,16 @@ if [ "$1" == "make" ];
         then
          applyDump "../bitrix/database/init.sql";
     fi
+    
     if [ "$2" == "dump" ];
         then
-          git clone $DATABASE_REPO ../docker/data/mysql/dump
+          git clone $DATABASE_REPO ../docker/data/mysql/dump || echo "not clone repo"
           makeDump ../docker/data/mysql/dump/database.sql;
+          cd ../docker/data/mysql/dump;
+          git add database.sql
+          git commit -a -m 'update database'
+          git push origin master
+          echo "PUSH SUCCESS"
     fi
 fi
 
@@ -100,7 +107,7 @@ if [ "$1" == "db" ];
 
     if [ "$2" == "export" ];
         then
-        docker exec -it ${PROJECT_PREFIX}_mysql mysqldump -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE;
+        runInMySql "export MYSQL_PWD='$MYSQL_PASSWORD'; mysqldump -u $MYSQL_USER $MYSQL_DATABASE"
     fi
 
 
