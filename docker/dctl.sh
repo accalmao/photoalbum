@@ -165,7 +165,12 @@ fi
 
 if [ "$1" == "run" ];
   then
+    if [ "$2" == "" ];
+        then
+        docker exec -it ${PROJECT_PREFIX}_php su www-data -c "cd ~; bash -l";
+    else
     runInPhp "${@:2}"
+    fi
 fi
 
 if [ "$1" == "in" ];
