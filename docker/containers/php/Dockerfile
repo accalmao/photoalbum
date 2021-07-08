@@ -1,4 +1,4 @@
-FROM phpdockerio/php71-fpm
+FROM zedsh/php7.1-fpm
 
 RUN mkdir -p /var/run/mysqld
 RUN mkdir -p /run/php
