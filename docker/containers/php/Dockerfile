@@ -36,6 +36,7 @@ RUN apt-get update \
     php7.1-imagick \
     php7.1-zip \
     php7.1-mcrypt \
+    ssmtp \
     bash \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
@@ -44,6 +45,7 @@ RUN apt-get update \
 ADD ./conf/php.ini /etc/php/7.1/fpm/php.ini
 ADD ./conf/php.ini /etc/php/7.1/cli/php.ini
 ADD ./conf/www.conf /etc/php/7.1/fpm/pool.d/www.conf
+COPY ./conf/ssmtp.conf /etc/ssmtp/ssmtp.conf
 RUN sed -i -e "s/www-data:x:33:33:www-data:\/var\/www:\/usr\/sbin\/nologin/www-data:x:${USER_ID}:${GROUP_ID}:www-data:\/var\/www\/html:\/bin\/bash/g" /etc/passwd
 RUN sed -i -e "s/www-data:x:33:/www-data:x:${GROUP_ID}:/g" /etc/group
 RUN rm -f /etc/php/7.1/fpm/pool.d/z-overrides.conf

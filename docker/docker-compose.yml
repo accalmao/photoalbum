@@ -69,17 +69,9 @@ services:
       - ./data/mysql:/var/lib/mysql
 
     restart: unless-stopped
-  selenium:
-    image: selenium/hub:3.12.0-cobalt
-    container_name: ${PROJECT_PREFIX}_selenium
-  chrome:
-    image: selenium/node-chrome:3.12.0-cobalt
-    container_name: ${PROJECT_PREFIX}_chrome
-    links:
-      - selenium
-    depends_on:
-      - selenium
-    environment:
-      - HUB_HOST=selenium
-      - HUB_PORT=4444
 
+  mailtrap:
+    container_name: ${PROJECT_PREFIX}_mailtrap
+    image: eaudeweb/mailtrap
+    ports:
+      - 1080:80
