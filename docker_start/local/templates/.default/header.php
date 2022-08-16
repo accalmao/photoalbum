@@ -5,6 +5,7 @@ IncludeTemplateLangFile(__FILE__);
 <head>
 <?php $APPLICATION->ShowHead();?>
 <title><?php $APPLICATION->ShowTitle()?></title>
+
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF">

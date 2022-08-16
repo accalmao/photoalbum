@@ -12,6 +12,6 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle('404');
 ?>
     <div class="page-404">
-        404 page    
+        Данная страница не существует
      </div>
 <?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
