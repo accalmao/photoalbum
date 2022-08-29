@@ -13,7 +13,11 @@
     $asset = \Bitrix\Main\Page\Asset::getInstance();
     $asset->addCss(SITE_TEMPLATE_PATH.'/assets/css/bootstrap.min.css');
     $asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/bootstrap.bundle.min.js');
+    $asset->addJs(SITE_TEMPLATE_PATH.'/js/bootstrap.js');
+
     ?>
+    <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery-3.6.0.min.js"></script>
+    <script src="<?= SITE_TEMPLATE_PATH ?>/js/main.js"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -28,12 +32,18 @@
                 font-size: 3.5rem;
             }
         }
+        #container { min-height: 100% }
+        *html #container { height: ex * pression(document.body.clientHeight > 50? "100%" :"50px"); }
+        #footer { height: 50px; margin-top: -50px; background: #cccccc; }
+        #antifooter { height: 50px; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
     </style>
 </head>
 <?$APPLICATION->ShowHead(); ?>
 <?$APPLICATION->ShowPanel(); ?>
 
 <header>
+
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
             <div class="row">

@@ -1,35 +1,35 @@
 <?php
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 /**
  * @global $APPLICATION
  */
-$APPLICATION->SetTitle("main page");
-$APPLICATION->IncludeComponent(
-    "tokmakov:iblock.element",
+$APPLICATION->SetTitle("Главная страница"); ?><?$APPLICATION->IncludeComponent(
+    "bitrix:menu",
+    "blue_tabs1",
+    array(
+        "ALLOW_MULTI_SELECT" => "N",
+        "CHILD_MENU_TYPE" => "left",
+        "DELAY" => "N",
+        "MAX_LEVEL" => "1",
+        "MENU_CACHE_GET_VARS" => array(
+        ),
+        "MENU_CACHE_TIME" => "3600",
+        "MENU_CACHE_TYPE" => "N",
+        "MENU_CACHE_USE_GROUPS" => "Y",
+        "ROOT_MENU_TYPE" => "top",
+        "USE_EXT" => "N",
+        "COMPONENT_TEMPLATE" => "blue_tabs1"
+    ),
+    false
+);?>
+<?$APPLICATION->IncludeComponent(
+    "project:photo.list",
     "",
     Array(
-        "ADD_SECTIONS_CHAIN" => "Y",
-        "CACHE_GROUPS" => "Y",
         "CACHE_TIME" => "3600",
         "CACHE_TYPE" => "A",
-        "ELEMENT_CODE" => $_REQUEST["ELEMENT_CODE"],
-        "ELEMENT_ID" => $_REQUEST["ELEMENT_ID"],
-        "ELEMENT_URL" => "item/id/#ELEMENT_ID#/",
-        "FILE_404" => "",
-        "IBLOCK_ID" => "5",
-        "IBLOCK_TYPE" => "content",
-        "MESSAGE_404" => "",
-        "SECTION_URL" => "category/id/#SECTION_ID#/",
-        "SET_BROWSER_TITLE" => "Y",
-        "SET_META_DESCRIPTION" => "Y",
-        "SET_META_KEYWORDS" => "Y",
-        "SET_PAGE_TITLE" => "Y",
-        "SET_STATUS_404" => "Y",
-        "SHOW_404" => "Y",
-        "USE_CODE_INSTEAD_ID" => "N"
+        "IBLOCK_CODE" => "album",
+        "IBLOCK_TYPE" => "2"
     )
-);
-?>
+);?><br><?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
 
-
-<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
