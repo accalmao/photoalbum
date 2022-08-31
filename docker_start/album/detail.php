@@ -6,7 +6,8 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
  * @var array $arParams
  */
 global $USER;
-$APPLICATION->SetTitle("detail"); ?><?$APPLICATION->IncludeComponent(
+$APPLICATION->SetTitle("detail"); ?>
+<?$APPLICATION->IncludeComponent(
     "project:photo.list2",
     "",
     Array(
