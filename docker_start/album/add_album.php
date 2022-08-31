@@ -4,25 +4,9 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
  * @global $APPLICATION
  */
 $APPLICATION->SetTitle("Добавление альбома");
-?><?$APPLICATION->IncludeComponent(
-    "bitrix:menu",
-    "blue_tabs1",
-    Array(
-        "ALLOW_MULTI_SELECT" => "N",
-        "CHILD_MENU_TYPE" => "left",
-        "COMPONENT_TEMPLATE" => "blue_tabs",
-        "DELAY" => "N",
-        "MAX_LEVEL" => "1",
-        "MENU_CACHE_GET_VARS" => "",
-        "MENU_CACHE_TIME" => "3600",
-        "MENU_CACHE_TYPE" => "N",
-        "MENU_CACHE_USE_GROUPS" => "Y",
-        "ROOT_MENU_TYPE" => "left",
-        "USE_EXT" => "N"
-    )
-);?> &nbsp;
+?>
 <?php CModule::IncludeModule('iblock');
-$IBLOCK_ID = 5; //ИД инфоблока с которым работаем?>
+$IBLOCK_ID = 5;?>
 <div  align="center">
     <h1>Добавление альбома</h1>
     <form style="width: 40%" class="card p-2" name="add_my_ankete" action="/album/add_form_result.php" method="POST" enctype="multipart/form-data">
