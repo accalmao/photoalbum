@@ -1,4 +1,7 @@
 <?php
+/**
+ * @global $APPLICATION
+ */
 define("NO_KEEP_STATISTIC", true);
 define("NOT_CHECK_PERMISSIONS", true);
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
@@ -6,71 +9,66 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 <?
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 
-if(!empty($_REQUEST['email']) and !empty($_REQUEST['firstname']) and !empty($_REQUEST['lastname']) and !empty($_REQUEST['password']) and !empty($_REQUEST['password_confirm']) ){
+    if(!empty($_POST['email']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['password']) && !empty($_POST['password_confirm']) ){
 
-if($APPLICATION->CaptchaCheckCode($_REQUEST["captcha_word"], $_REQUEST["captcha_sid"])){
+        if($APPLICATION->CaptchaCheckCode($_POST["captcha_word"], $_POST["captcha_sid"])){
 
-global $USER;
-global $DB;
-$login = strip_tags($_REQUEST['email']);
-$firstname = strip_tags($_REQUEST['firstname']);
-$lastname = strip_tags($_REQUEST['lastname']);
-$email = strip_tags($_REQUEST['email']);
-$password = strip_tags($_REQUEST['password']);
-$password_confirm = strip_tags($_REQUEST['password_confirm']);
+            global $USER, $DB;
+            $login = strip_tags($_POST['email']);
+            $firstname = strip_tags($_POST['firstname']);
+            $lastname = strip_tags($_POST['lastname']);
+            $email = strip_tags($_POST['email']);
+            $password = strip_tags($_POST['password']);
+            $password_confirm = strip_tags($_POST['password_confirm']);
 
-$bConfirmReq = (COption::GetOptionString("main", "new_user_registration_email_confirmation", "N")) == "Y";
+            $bConfirmReq = (COption::GetOptionString("main", "new_user_registration_email_confirmation", "N")) == "Y";
 
-$arFields = Array(
-"NAME"              => $firstname,
-"PERSONAL_PHONE"    => $lastname,
-"EMAIL"             => $email,
-"LOGIN"             => $login,
-"LID"               => SITE_ID,
-"ACTIVE"            => "Y",
-"GROUP_ID"          => array(2),
-"PASSWORD"          => $password,
-"CONFIRM_PASSWORD"  => $password_confirm,
-"CHECKWORD" => md5(CMain::GetServerUniqID().uniqid()),
-"~CHECKWORD_TIME" => $DB->CurrentTimeFunction(),
-"CONFIRM_CODE" =>$bConfirmReq? randString(8): ""
-);
+            $arFields = Array(
+            "NAME"              => $firstname,
+            "PERSONAL_PHONE"    => $lastname,
+            "EMAIL"             => $email,
+            "LOGIN"             => $login,
+            "LID"               => SITE_ID,
+            "ACTIVE"            => "Y",
+            "GROUP_ID"          => array(2),
+            "PASSWORD"          => $password,
+            "CONFIRM_PASSWORD"  => $password_confirm,
+            "CHECKWORD" => md5(CMain::GetServerUniqID().uniqid()),
+            "~CHECKWORD_TIME" => $DB->CurrentTimeFunction(),
+            "CONFIRM_CODE" =>$bConfirmReq? randString(8): ""
+            );
 
-$CUser = new CUser;
-$USER_ID = $CUser->Add($arFields);
+            $CUser = new CUser;
+            $USER_ID = $CUser->Add($arFields);
 
-if (intval($USER_ID) > 0){
-$result['status'] = 'success';
-$result['message'] = 'Вы успешно зарегистрировались';
+            if (intval($USER_ID) > 0){
+                $result['status'] = 'success';
+                $result['message'] = 'Вы успешно зарегистрировались';
+                $arFields['USER_ID'] = $USER_ID;
+                $arEventFields = $arFields;
+                $event = new CEvent;
+                    if($bConfirmReq){
+                        $event->SendImmediate("NEW_USER_CONFIRM", SITE_ID, $arEventFields);
+                    }else{
+                        $event->SendImmediate("USER_INFO", SITE_ID, $arEventFields);
+                    }
+                $event->SendImmediate("NEW_USER", SITE_ID, $arEventFields);
+                }
+                else{
+                    $result['status'] = 'error';
+                    $result['message'] = html_entity_decode($CUser->LAST_ERROR);
+                    }
 
-$arFields['USER_ID'] = $USER_ID;
+        }else{
+            $result['status'] = 'error';
+            $result['message'] = 'Не правильный код картинки';
+        }
+    }else{
+        $result['status'] = 'error';
+        $result['message'] = 'Все поля обязательны для заполнения';
+    }
 
-$arEventFields = $arFields;
-
-$event = new CEvent;
-if($bConfirmReq){
-$event->SendImmediate("NEW_USER_CONFIRM", SITE_ID, $arEventFields);
-}else{
-$event->SendImmediate("USER_INFO", SITE_ID, $arEventFields);
-}
-// Отправляем Оповешение администратору
-$event->SendImmediate("NEW_USER", SITE_ID, $arEventFields);
-}
-else{
-$result['status'] = 'error';
-$result['message'] = html_entity_decode($CUser->LAST_ERROR);
-}
-
-}else{
-$result['status'] = 'error';
-$result['message'] = 'Не правильный код картинки';
-}
-}else{
-$result['status'] = 'error';
-$result['message'] = 'Все поля обязательны для заполнения';
-}
-
-echo json_encode($result);
+    echo json_encode($result, JSON_UNESCAPED_UNICODE);
 }
 
 ?>

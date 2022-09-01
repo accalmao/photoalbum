@@ -7,34 +7,31 @@ define("NO_KEEP_STATISTIC", true);
 define("NOT_CHECK_PERMISSIONS", true);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 ?>
-&nbsp;
+    &nbsp;
 <?php
-if (!empty($_REQUEST['name']) and !empty($_REQUEST['description'])) {
+if (!empty($_POST['name']) and !empty($_POST['description'])) {
 
     CModule::IncludeModule('iblock');
 
-    //Погнали
     $el = new CIBlockSection();
-    $iblock_id = 5;
-    //Свойства
+    $iblock_id = 6;
 
-    //Основные поля элемента
     $arFields = array(
-        "DATE_CREATE" => date("d.m.Y H:i:s"), //Передаем дата создания
-        "CREATED_BY" => $GLOBALS['USER']->GetID(),  //Передаем ID пользователя кто добавляет
-        "IBLOCK_ID" => $iblock_id, //ID информационного блока он 24-ый
-        "NAME" => strip_tags($_REQUEST['name']),
-        "ACTIVE" => "Y", //поумолчанию делаем активным или ставим N для отключении поумолчанию
-        "DESCRIPTION" => strip_tags($_REQUEST['description']), //Анонс
-        "PICTURE" => $_FILES['image'], //изображение для анонса
+        "DATE_CREATE" => date("d.m.Y H:i:s"),
+        "CREATED_BY" => $GLOBALS['USER']->GetID(),
+        "IBLOCK_ID" => $iblock_id,
+        "IBLOCK_CODE"=>strip_tags($_POST['code']),
+        "NAME" => strip_tags($_POST['name']),
+        "ACTIVE" => "Y",
+        "DESCRIPTION" => strip_tags($_POST['description']),
+        "PICTURE" => $_FILES['image'],
     );
 
-	   //Результат в конце отработки
-	   if ($ID = $el->Add($arFields)) {
-           echo "Альбом создан.";
-       } else {
-           echo 'Произошел как-то косяк Попробуйте еще разок';
-       }
-	 }
+    if ($ID = $el->Add($arFields)) {
+        echo "Альбом создан.";
+    } else {
+        echo 'Произошла ошибка. Попробуйте ещё раз.';
+    }
+}
 ?>
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

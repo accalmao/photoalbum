@@ -10,10 +10,10 @@ $arUrlRewrite=array (
   ),
   0 => 
   array (
-    'CONDITION' => '#^/lp/#',
+    'CONDITION' => '#^/albums/#',
     'RULE' => NULL,
-    'ID' => 'bitrix:landing.pub',
-    'PATH' => '/lp/index.php',
+    'ID' => 'project:albums',
+    'PATH' => '/albums/index.php',
     'SORT' => 100,
   ),
 );

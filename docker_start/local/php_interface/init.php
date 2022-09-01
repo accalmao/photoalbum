@@ -10,7 +10,7 @@ require(__DIR__ . "/include/functions.php");
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", Array("MyClass", "CheckOwnerBeforeUpdate"));
 AddEventHandler("iblock", "OnBeforeIBlockElementDelete", Array("MyClass", "CheckOwnerBeforeDelete"));
 
-class MyClass
+class ChangeOnlyOwner
 {
     public function CheckOwnerBeforeUpdate(&$arParams)
     {

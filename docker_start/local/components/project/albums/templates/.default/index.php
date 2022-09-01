@@ -3,8 +3,10 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 /**
  * @global $APPLICATION
  */
-$APPLICATION->SetTitle("Главная страница"); ?><?$APPLICATION->IncludeComponent(
-	"project:photo.list.last",
+$APPLICATION->SetTitle("Все альбомы"); ?>
+
+<?$APPLICATION->IncludeComponent(
+	"project:photo.list.all",
 	"",
 	Array(
 		"CACHE_TIME" => "3600",

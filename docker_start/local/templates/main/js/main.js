@@ -19,7 +19,7 @@ $(document).ready(function () {
                         $("#register-form .message").removeClass("error");
                         $("#register-form .message").addClass("success");
                         $("#register-form .modal-body").html("");
-                        $("#register-form .modal-footer").html("Вы успешно зарегистрировались!</br>Вернитесь на главную страницу для авторизации.");
+                        $("#register-form .modal-footer").html("Вы успешно зарегистрировались!</br>Перейдите на страницу авторизации чтобы продолжить.");
 
                     }
                 }

@@ -6,7 +6,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Добавление альбома");
 ?>
 <?php CModule::IncludeModule('iblock');
-$IBLOCK_ID = 5;?>
+$IBLOCK_ID = 6;?>
 <div  align="center">
     <h1>Добавление альбома</h1>
     <form style="width: 40%" class="card p-2" name="add_my_ankete" action="/album/add_form_result.php" method="POST" enctype="multipart/form-data">

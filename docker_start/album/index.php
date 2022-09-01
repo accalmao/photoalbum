@@ -5,13 +5,16 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
  */
 $APPLICATION->SetTitle("Все альбомы"); ?>
 
-<?$APPLICATION->IncludeComponent(
-	"project:photo.list3",
-	"",
-	Array(
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "A",
-		"IBLOCK_CODE" => "album",
-		"IBLOCK_TYPE" => "2"
-	)
-);?><br><?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+<? $APPLICATION->IncludeComponent(
+    "project:albums",
+    "",
+    [
+        "SEF_FOLDER"        => "/albums/",
+        "SEF_MODE"          => "Y",
+        "SEF_URL_TEMPLATES" =>
+            [
+                "index"  => 'index.php',
+                "detail" => '#CODE#/',
+            ],
+    ]
+); ?><br><?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

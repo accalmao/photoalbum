@@ -15,7 +15,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 
         $el = new CIBlockElement;
 
-        $iblock_id = 5;
+        $iblock_id = 6;
         $PROP = array();
 
         $PROP['DECRIP'] = $_POST['description'];
@@ -47,13 +47,6 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
         $result['message'] = 'Все поля обязательны для заполнения';
     }
 
-    echo json_encode($result); //передаем результат формата JSON
-    echo "<pre>";
-    print_r($arFields);
-    echo "</pre>";
-
-
-
-
+    echo json_encode($result, JSON_UNESCAPED_UNICODE); //передаем результат формата JSON
 }
 ?>

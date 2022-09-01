@@ -8,6 +8,27 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Все альбомы", 
+		"/album/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Регистрация", 
+		"/auth/registration.php", 
+		Array(), 
+		Array(), 
+		"!\$USER->IsAuthorized();" 
+	),
+	Array(
+		"Авторизация", 
+		"/auth/", 
+		Array(), 
+		Array(), 
+		"!\$USER->IsAuthorized();" 
+	),
+	Array(
 		"Добавление альбома", 
 		"/album/add_album.php", 
 		Array(), 
