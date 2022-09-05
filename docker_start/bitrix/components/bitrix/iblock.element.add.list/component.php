@@ -183,6 +183,7 @@ if (CModule::IncludeModule("iblock"))
 
 			if ($arResult["CAN_EDIT"] == "Y" && !$bCanEdit) $arResult["CAN_EDIT"] = "N";
 			if ($arResult["CAN_DELETE"] == "Y" && !$bCanDelete) $arResult["CAN_DELETE"] = "N";
+
 		}
 		else
 		{
@@ -198,4 +199,4 @@ if (CModule::IncludeModule("iblock"))
 		$APPLICATION->AuthForm("");
 	}
 }
-?>
+

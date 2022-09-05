@@ -33,8 +33,8 @@ $APPLICATION->SetTitle("detail"); ?>
 		"ELEMENT_ASSOC" => "CREATED_BY",
 		"GROUPS" => array(
 		),
-		"IBLOCK_ID" => "5",
-		"IBLOCK_TYPE" => "2",
+		"IBLOCK_ID" => "6",
+		"IBLOCK_TYPE" => "albums",
 		"LEVEL_LAST" => "Y",
 		"MAX_FILE_SIZE" => "0",
 		"MAX_LEVELS" => "100000",
@@ -46,13 +46,14 @@ $APPLICATION->SetTitle("detail"); ?>
 		"PROPERTY_CODES_REQUIRED" => array(
 		),
 		"RESIZE_IMAGES" => "N",
-		"SEF_MODE" => "N",
+		"SEF_MODE" => "Y",
 		"STATUS" => "ANY",
 		"STATUS_NEW" => "N",
 		"USER_MESSAGE_ADD" => "",
 		"USER_MESSAGE_EDIT" => "",
 		"USE_CAPTCHA" => "N",
-		"COMPONENT_TEMPLATE" => "template1"
+		"COMPONENT_TEMPLATE" => "template1",
+		"SEF_FOLDER" => "/albums/"
 	),
 	false
 );?><?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

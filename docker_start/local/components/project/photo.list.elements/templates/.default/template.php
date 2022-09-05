@@ -68,14 +68,14 @@ Loc::loadMessages(__FILE__);
 
                             <fieldset class="form-group">
                                 <label>Название</label>
-                                <input type="text" name="name" class="form-control" maxlength="255"
-                                       placeholder="Например, продажа вещей">
+                                <input type="text" name="name"  class="form-control" maxlength="255"
+                                       placeholder="Имя фотографии">
                             </fieldset>
 
                             <fieldset class="form-group">
                                 <label>Подробное описание</label>
                                 <textarea name="description" class="form-control" rows="3"
-                                          placeholder="Описание..."></textarea>
+                                          placeholder="Описание"></textarea>
                             </fieldset>
 
                             <fieldset class="form-group">

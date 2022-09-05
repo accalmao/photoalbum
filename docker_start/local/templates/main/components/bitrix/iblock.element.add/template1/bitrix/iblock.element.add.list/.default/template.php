@@ -30,14 +30,25 @@ if ($arResult["CAN_DELETE"] == "Y") $colspan++;
         <td<?=$colspan > 1 ? " colspan=\"".$colspan."\"" : ""?>><p class="lead">Список фотографий добавленных пользователем в свои альбомы</p></td>
     </tr>
 	</thead>
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Статус</th>
+        <th>Имя раздела</th>
+    </tr>
+    </thead>
 	<tbody>
+
 	<?if (count($arResult["ELEMENTS"]) > 0):?>
 		<?foreach ($arResult["ELEMENTS"] as $arElement):?>
     <div class="col-md-7 col-lg-8">
-            <tr>
+
+        <tr>
 			<td ><!--a href="detail.php?CODE=<?=$arElement["ID"]?>"--><?=$arElement["NAME"]?><!--/a--></td>
 			<td><small><?=is_array($arResult["WF_STATUS"]) ? $arResult["WF_STATUS"][$arElement["WF_STATUS_ID"]] : $arResult["ACTIVE_STATUS"][$arElement["ACTIVE"]]?></small></td>
-
+                <td ><small><?$res = CIBlockSection::GetByID($arElement["IBLOCK_SECTION_ID"]);
+                        if($ar_res = $res->GetNext())
+                        echo $ar_res['NAME'];?><!--/a--></small></td>
 			<?if ($arResult["CAN_DELETE"] == "Y"):?>
                 <td><?if ($arElement["CAN_DELETE"] == "Y"):?><button class="btn btn-primary btn-sm" type="submit"><a style="color: #ffffff; text-decoration: none; " href="?delete=Y&amp;CODE=<?=$arElement["ID"]?>&amp;<?=bitrix_sessid_get()?>" onClick="return confirm('<?echo CUtil::JSEscape(str_replace("#ELEMENT_NAME#", $arElement["NAME"], GetMessage("IBLOCK_ADD_LIST_DELETE_CONFIRM")))?>')"><?=GetMessage("IBLOCK_ADD_LIST_DELETE")?></a></button><?else:?>&nbsp;<?endif?></td>
 			<?endif?>
@@ -52,7 +63,7 @@ if ($arResult["CAN_DELETE"] == "Y") $colspan++;
 	</tbody>
 <?endif?>
 	<tfoot>
-
 	</tfoot>
 </table>
+
 <?if (strlen($arResult["NAV_STRING"]) > 0):?><?=$arResult["NAV_STRING"]?><?endif?>

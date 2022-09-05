@@ -32,6 +32,7 @@
                 font-size: 3.5rem;
             }
         }
+
         #container { min-height: 100% }
         *html #container { height: ex * pression(document.body.clientHeight > 50? "100%" :"50px"); }
         #footer { height: 50px; margin-top: -50px; background: #cccccc; }
