@@ -17,6 +17,16 @@ $APPLICATION->SetTitle("detail"); ?>
         "IBLOCK_TYPE" => "albums",
     )
 );?>
+<?$APPLICATION->IncludeComponent(
+    "project:photo.add.button",
+    "",
+    Array(
+        "CACHE_TIME" => "3600",
+        "CACHE_TYPE" => "A",
+        "IBLOCK_CODE" => "albums",
+        "IBLOCK_TYPE" => "albums",
+    )
+);?>
 
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

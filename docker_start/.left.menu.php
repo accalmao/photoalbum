@@ -9,7 +9,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Все альбомы", 
-		"/album/", 
+		"/albums/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -30,14 +30,14 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Добавление альбома", 
-		"/album/add_album.php", 
+		"/albums/add_album.php", 
 		Array(), 
 		Array(), 
 		"CSite::InGroup(array(1,3,4,5))" 
 	),
 	Array(
 		"Удаление фотографий", 
-		"/album/delete.php", 
+		"/albums/delete.php", 
 		Array(), 
 		Array(), 
 		"CSite::InGroup(array(1,3,4,5))" 

@@ -7,7 +7,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
  */
 global $USER;
 $APPLICATION->SetTitle("detail"); ?>
-<?$APPLICATION->IncludeComponent(
+<? $APPLICATION->IncludeComponent(
     "project:photo.list.elements",
     "",
     Array(
@@ -15,8 +15,8 @@ $APPLICATION->SetTitle("detail"); ?>
         "CACHE_TYPE" => "A",
         "IBLOCK_CODE" => "albums",
         "IBLOCK_TYPE" => "albums",
+        'CODE' => $arResult['VARIABLES']['CODE'],
     )
 );?>
-
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

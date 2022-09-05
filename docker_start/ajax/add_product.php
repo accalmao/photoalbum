@@ -5,31 +5,31 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.
 
 ?>
 
-<?
-if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+<?php
+$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
-    if (!empty($_REQUEST['name']) and !empty($_REQUEST['description'])) {
+if ($request->isAjaxRequest()) {
+
+    if (!empty($request->getPost('name')) and !empty($request->getPost('description'))) {
 
 
         CModule::IncludeModule('iblock');
 
         $el = new CIBlockElement;
 
-        $iblock_id = 6;
         $PROP = array();
-
-        $PROP['DECRIP'] = $_POST['description'];
-
+        $PROP['DECRIP'] = $request->getPost('description');
+        $section = CIBlockSection::GetList([], ['CODE' => $_POST['section']])->Fetch();
         $arFields = array(
             "DATE_CREATE" => date("d.m.Y H:i:s"),
             "CREATED_BY" => $GLOBALS['USER']->GetID(),
-            "IBLOCK_SECTION_ID" => $_REQUEST['section'],
+            "IBLOCK_SECTION_ID" => $section['ID'],
             "PROPERTY_VALUES" => $PROP,
-            "IBLOCK_ID" => 5,
-            "NAME" => strip_tags($_REQUEST['name']),
+            "IBLOCK_ID" => 6,
+            "NAME" => strip_tags($_POST['name']),
             "ACTIVE" => "Y",
-            "PREVIEW_TEXT" => mb_substr(strip_tags($_REQUEST['description']), 0, 100),
-            "DETAIL_TEXT" => strip_tags($_REQUEST['description'], '<br></br><p>'),
+            "PREVIEW_TEXT" => mb_substr(strip_tags($_POST['description']), 0, 100),
+            "DETAIL_TEXT" => strip_tags($_POST['description'], '<br></br><p>'),
             "PREVIEW_PICTURE" => $_FILES['image'],
             "DETAIL_PICTURE" => $_FILES['image']
         );
@@ -49,4 +49,3 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 
     echo json_encode($result, JSON_UNESCAPED_UNICODE); //передаем результат формата JSON
 }
-?>

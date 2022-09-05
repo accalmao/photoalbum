@@ -2,11 +2,15 @@
 /**
  * @global $APPLICATION
  */
+
+
+use Bitrix\Main\Context;
+
 define("NO_KEEP_STATISTIC", true);
 define("NOT_CHECK_PERMISSIONS", true);
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 ?>
-<?
+<?php
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 
     if(!empty($_POST['email']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['password']) && !empty($_POST['password_confirm']) ){

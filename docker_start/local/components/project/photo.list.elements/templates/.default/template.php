@@ -15,9 +15,7 @@ use \Bitrix\Main\Localization\Loc as Loc;
 Loc::loadMessages(__FILE__);
 ?>
 <div class="content">
-
     <main>
-
         <div class="album py-5 bg-light">
             <div class="container">
                 <h1 class="fw-light">Фотографии выбранного альбома </h1>
@@ -45,71 +43,69 @@ Loc::loadMessages(__FILE__);
                         </div>
                     <?php
                     endforeach; ?>
-
                 </div>
             </div>
         </div>
+        <?php
+        if ($arResult['ALBUM_CREATED_BY'] == $USER->GetID()): ?>
+            <button data-toggle="modal" data-target="#add-product-modal" class="btn_blue add-ad" value=" ">
+                Добавить фото
+            </button>
+        <?php endif; ?>
 
-    </main>
-    <?php
-    if ($arResult['ALBUM_CREATED_BY'] == $USER->GetID()): ?>
-        <button data-toggle="modal" data-target="#add-product-modal" class="btn_blue add-ad" value=" ">
-            Добавить фото
-        </button>
-    <?php endif; ?>
+        <div id="add-product-modal" class="modal fade add-product-modal" role="dialog">
+            <div class="modal-dialog" action="/ajax/add_product.php" method="POST">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span></button>
+                        <h4 class="modal-title">Добавить фото</h4>
+                    </div>
 
-    <div id="add-product-modal" class="modal fade add-product-modal" role="dialog">
-        <div class="modal-dialog" action="/ajax/add_product.php" method="POST">
+                    <div class="modal-body">
+                        <div class="message error hide"></div>
+                        <form id="add-product-form" enctype="multipart/form-data">
 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"></span></button>
-                    <h4 class="modal-title">Добавить фото</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="message error hide"></div>
-                    <form id="add-product-form" enctype="multipart/form-data">
-
-                        <fieldset class="form-group">
-                            <label>Название</label>
-                            <input type="text" name="name" class="form-control" maxlength="255"
-                                   placeholder="Например, продажа вещей">
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <label>Подробное описание</label>
-                            <textarea name="description" class="form-control" rows="3"
-                                      placeholder="Описание..."></textarea>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <div class="upload-div">
-                                <label>Фотография</label>
-                                <label>
-                                    <input type="file" name="image">
-                                </label>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <input type="hidden" name="section" value="<?= htmlspecialchars($_GET["SECTION_ID"]) ?>">
-                        </fieldset>
-
-                        <div class="modal-footer">
                             <fieldset class="form-group">
-                                <div>
-                                    <button type="submit" class="btn_blue sale-submit js-addphoto">Разместить фото
-                                    </button>
+                                <label>Название</label>
+                                <input type="text" name="name" class="form-control" maxlength="255"
+                                       placeholder="Например, продажа вещей">
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label>Подробное описание</label>
+                                <textarea name="description" class="form-control" rows="3"
+                                          placeholder="Описание..."></textarea>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <div class="upload-div">
+                                    <label>Фотография</label>
+                                    <label>
+                                        <input type="file" name="image">
+                                    </label>
                                 </div>
                             </fieldset>
-                        </div>
 
-                    </form>
+                            <fieldset class="form-group">
+                                <input type="hidden" name="section"
+                                       value="<?= $arParams['CODE']?>">
+                            </fieldset>
+
+                            <div class="modal-footer">
+                                <fieldset class="form-group">
+                                    <div>
+                                        <button type="submit" class="btn_blue sale-submit js-addphoto">Разместить фото
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
+</main>
 

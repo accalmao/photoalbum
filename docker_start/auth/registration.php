@@ -6,6 +6,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
  */
 $APPLICATION->SetTitle("Регистрация");
 ?>
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['firstname'];

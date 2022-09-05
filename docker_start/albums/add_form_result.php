@@ -20,7 +20,7 @@ if (!empty($_POST['name']) and !empty($_POST['description'])) {
         "DATE_CREATE" => date("d.m.Y H:i:s"),
         "CREATED_BY" => $GLOBALS['USER']->GetID(),
         "IBLOCK_ID" => $iblock_id,
-        "IBLOCK_CODE"=>strip_tags($_POST['code']),
+        "CODE"=>strip_tags($_POST['code']),
         "NAME" => strip_tags($_POST['name']),
         "ACTIVE" => "Y",
         "DESCRIPTION" => strip_tags($_POST['description']),
